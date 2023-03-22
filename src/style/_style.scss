@@ -67,15 +67,7 @@ fieldset {
     transform: scale(0);
 }
 
-main {
-    margin-bottom: 120px;
-    @include tablet {
-        margin-bottom: 80px;
-    }
-    @include mobile {
-        margin-bottom: 60px;
-    }
-}
+
 
 
 /*
@@ -105,6 +97,16 @@ main {
 
     @include mobile {
         --padding: 15px;
+    }
+}
+
+main {
+    margin-bottom: 120px;
+    @include tablet {
+        margin-bottom: 80px;
+    }
+    @include mobile {
+        margin-bottom: 60px;
     }
 }
   

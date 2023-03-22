@@ -1,0 +1,70 @@
+.footer {
+    &__container {
+        padding-top: 51px;
+        padding-bottom: 24px;
+        border-top: 1px solid $light-gray;
+        display: grid;
+        grid-template-areas: 
+        'category social contacts'
+        'copyright . development';
+        grid-template-columns: 1fr 2fr 1fr;
+        gap: 26px 20px;
+        @include laptop {
+            padding-top: 31px;
+            grid-template-columns: 1fr 1fr 1fr;
+        }
+        @include tablet {
+            padding-top: 25px;
+            padding-bottom: 16px;
+            row-gap: 17px;
+            grid-template-columns: 1fr 2fr 1fr;
+        }
+        @include mobile {
+            padding-top: 17px;
+            grid-template-columns: 1fr max-content;
+            gap: 24px;
+            grid-template-areas: 
+            'category social'
+            'contacts contacts'
+            'development development'
+            'copyright copyright';
+        }
+    }
+    &__item {
+        &_category {
+            grid-area: category;
+        }
+        &_social {
+            grid-area: social;
+            justify-self: center;
+        }
+        &_contacts {
+            grid-area: contacts;
+        }
+        &_copyright {
+            grid-area: copyright;
+            align-self: end;
+        }
+        &_development {
+            grid-area: development;
+        }
+    }
+    &__title {
+        font-weight: 400;
+        font-size: 18px;
+        text-transform: uppercase;
+        @include tablet {
+            font-size: 16px;
+        }
+        @include mobile {
+            font-size: 14px;
+        }
+    }
+    &__link {
+        transition: 0.2s ease-in-out;
+        &:hover {
+            color: $gray;
+        }
+    }
+    
+}
