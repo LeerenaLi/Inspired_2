@@ -37,8 +37,15 @@ const container = createElement('div', {
     innerHTML: `
         <a href="tel:89304902620" class="header__phone header__link">8 930 490 26 20</a>
 
-        <img src="${logo}" alt="Логотип" class="header__logo">
     `
+});
+
+createElement('a', {
+    className: 'headeer__logo',
+    href: '/#',
+    innerHTML: `<img src="${logo}" alt="Логотип Inspired">`
+}, {
+    parent: container,
 });
 
 const nav = createElement('div', {

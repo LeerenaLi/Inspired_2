@@ -6,5 +6,5 @@ import { renderNavigation } from "../render/renderNavigation";
 export const mainPage = (gender = 'women') => {
     renderNavigation(gender);
     renderHero(gender);
-    renderGoods();
+    renderGoods('новинки', {gender});
 }
