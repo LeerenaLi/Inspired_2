@@ -10,40 +10,55 @@ import { menMainPage } from './modules/mainPage/menMainPage';
 import { getData } from './modules/getData';
 import { API_URL, DATA } from './modules/const';
 import { createCssColors } from './modules/createCssColors';
+import { createElement } from './modules/createElement';
 
 const init = async () => {
-    DATA.navigation = await getData(`${API_URL}/api/categories`);
-    DATA.colors = await getData(`${API_URL}/api/colors`);
+    try {
+        router.on('*', () => {
+            renderHeader();
+            renderFooter();
+        });
 
-    createCssColors(DATA.colors);
-    console.log('DATA.colors: ', DATA.colors);
+        DATA.navigation = await getData(`${API_URL}/api/categories`);
+        DATA.colors = await getData(`${API_URL}/api/colors`);
 
-    router.on('*', () => {
-        renderHeader();
-        renderFooter();
-    });
-    
-    router.on('/', () => {
-        mainPage();
-    });
-    
-    router.on('women', () => {
-        womenMainPage();
-    });
-    
-    router.on('men', () => {
-        menMainPage();
-    });
-    
-    // setTimeout(() => {
-    //     router.navigate('men');
-    // }, 3000)
-    
-    // setTimeout(() => {
-    //     router.navigate('women');
-    // }, 6000)
-    
-    router.resolve();
+        createCssColors(DATA.colors);
+
+        router.on('/', () => {
+            mainPage();
+        });
+        
+        router.on('women', () => {
+            womenMainPage();
+        });
+        
+        router.on('men', () => {
+            menMainPage();
+        });
+
+        router.on('search', (data) => {
+            console.log(data.params.value);
+        });
+        
+        // setTimeout(() => {
+        //     router.navigate('men');
+        // }, 3000)
+        
+        // setTimeout(() => {
+        //     router.navigate('women');
+        // }, 6000)
+    } catch (e) {
+        createElement('h2', {
+            textContent: 'Что-то пошло не так, попробуйте позже...'
+        }, {
+            parent: document.querySelector('main'),
+            cb(h2) {
+                h2.style.textAlign = 'center'
+            }
+        })
+    } finally {
+        router.resolve();
+    }
 }
 
 init();

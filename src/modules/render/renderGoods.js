@@ -9,7 +9,7 @@ export const renderGoods = async (title, params) => {
     goods.textContent = '';
 
     const products = await getData(`${API_URL}/api/goods`, params);
-    console.log('products: ', products);
+    
     const container = createElement('div', {
         className: 'container',
     }, {
@@ -73,19 +73,5 @@ export const renderGoods = async (title, params) => {
     }, {
         appends: listCard,
         parent: container,
-    })
-
-    // <ul class="product__color-list">
-    //     <li class="product__color-item">
-    //         <div class="color color_red color_check"></div>
-    //     </li>
-
-    //     <li class="product__color-item">
-    //         <div class="color color_white"></div>
-    //     </li>
-
-    //     <li class="product__color-item">
-    //         <div class="color color_black"></div>
-    //     </li>
-    // </ul>
+    });
 }
