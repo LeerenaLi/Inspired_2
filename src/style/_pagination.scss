@@ -1,0 +1,41 @@
+.pagination {
+    &__list {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 7px;
+    }
+    &__item {
+        order: 1;
+    }
+    &__link {
+        padding: 0 7px 7px 7px;
+        font-weight: 400;
+        font-size: 14px;
+        color: $gray;
+        &_active {
+            color: $main-color;
+            border-bottom: 1px solid $main-color;
+        }
+    }
+    &__arrow {
+        width: 24px;
+        height: 24px;
+        background-image: url('../img/arrow-next.svg');
+        background-repeat: no-repeat;
+        &_start {
+            transform: rotate(180deg);
+        }
+        &_start-disabled {
+            background-image: url('../img/arrow-disabled.svg');
+        }
+        &_end {
+            order: 2;
+        }
+        &_end-disabled {
+            background-image: url('../img/arrow-disabled.svg');
+            transform: rotate(180deg);
+            order: 2;
+        }
+    }
+}
