@@ -1,8 +1,7 @@
-import { createElement } from "../createElement";
-import { router } from "../router";
+import { createElement } from "../utils/createElement";
+import { getUrl } from "../utils/getUrl";
 
 export const renderPagination = (wrapperPagination, page, pages, count) => {
-    console.log('pages: ', pages);
     wrapperPagination.textContent = '';
 
     const paginationList = createElement('ul', {
@@ -35,7 +34,7 @@ export const renderPagination = (wrapperPagination, page, pages, count) => {
             parent: paginationList,
             append: createElement('a', {
                 textContent: n,
-                href: `${router.getCurrentLocation().url}?page=${n}`,
+                href: getUrl({page: n}),
                 className: `pagination__link ${page === n ? 'pagination__link_active' : ''}`
             })
         })
@@ -45,7 +44,7 @@ export const renderPagination = (wrapperPagination, page, pages, count) => {
         createElement('a', {
             className: `pagination__arrow
                 ${!isNotStart ? 'pagination__arrow_start-disabled' : 'pagination__arrow_start'}`,
-            href: `${router.getCurrentLocation().url}?page=${1}`,
+            href: getUrl({page: 1}),
             // textContent: 'start',
             ariaLabel: 'В начало',
         }, {
@@ -54,7 +53,7 @@ export const renderPagination = (wrapperPagination, page, pages, count) => {
         createElement('a', {
             className: `pagination__arrow 
                 ${isEnd ? 'pagination__arrow_end-disabled' : 'pagination__arrow_end'}`,
-            href: `${router.getCurrentLocation().url}?page=${pages}`,
+            href: getUrl({page: pages}),
             // textContent: 'end',
             ariaLabel: 'В конец',
         }, {
