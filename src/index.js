@@ -9,9 +9,10 @@ import { getData } from './modules/getData';
 import { API_URL, DATA, main } from './modules/const';
 import { createCssColors } from './modules/createCssColors';
 import { createElement } from './modules/utils/createElement';
-import { categoryPage } from './modules/controller/categoryPage';
+import { categoryPageController } from './modules/controller/categoryPageController';
 import { searchPageController } from './modules/controller/searchController';
 import { favoriteController } from './modules/controller/favoriteController';
+import { cardController } from './modules/controller/cardController';
 
 const init = async () => {
     try {
@@ -37,7 +38,9 @@ const init = async () => {
             mainPage('men');
         });
 
-        router.on('/:gender/:category', categoryPage);
+        router.on('/:gender/:category', categoryPageController);
+
+        router.on('/product/:id', cardController);
 
         router.on('search', searchPageController);
 
