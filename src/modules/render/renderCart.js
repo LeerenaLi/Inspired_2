@@ -1,4 +1,8 @@
-import { cart } from "../const"
+import { API_URL, cart } from "../const"
+import { addProductCart, getCart, removeCart } from "../controller/cartController";
+import { getData } from "../getData";
+import { createElement } from "../utils/createElement";
+import { renderCount } from "./renderCount";
 
 export const renderCart = ({render}) => {
     cart.textContent = '';
@@ -6,9 +10,111 @@ export const renderCart = ({render}) => {
     if (!render) {
         return;
     }
+
+    const container = createElement('div', {
+        className: 'container',
+        innerHTML: '<h2 class="cart__title">Корзина</h2>',
+    }, {
+        parent: cart,
+    });
+
+    const cartList = createElement('ul', {
+        className: 'cart__list',
+    }, {
+        parent: container,
+    });
+
+    getCart().forEach(async product => {
+        const data = await getData(`${API_URL}/api/goods/${product.id}`);
+        
+        const li = createElement('li', {
+            className: 'cart__item',
+        }, {
+            parent: cartList,
+        });
+
+        const article = createElement('article', {
+            className: 'item',
+        }, {
+            parent: li,
+        });
+
+        article.insertAdjacentHTML('beforeend', `
+            <img src="${API_URL}/${data.pic}" alt="${data.title}" class="item__img">
+
+            <div class="item__content">
+                <h3 class="item__title">${data.title}</h3>
+
+                <p class="item__price">руб ${data.price}</p>
+
+                <div class="item__vendor-code">
+                    <span class="item__subtitle">Артикул</span>
+                    <span class="item__id">${product.id}</span>
+                </div>
+            </div>
+
+            <div class="item__prop">
+                <div class="item__color">
+                    <span class="item__subtitle item__color-title">Цвет</span>
+
+                    <div class="item__color-item color color_${product.color} color_check"></div>
+                </div>
+
+                <div class="item__size">
+                    <span class="item__subtitle item__size-title">Размер</span>
+
+                    <div class="item__size-item size">${product.size}</div>
+                </div>
+            </div>
+        `);
+
+        createElement('button', {
+            className: 'item__del',
+            ariaLabel: 'Удалить товар из корзины',
+        }, {
+            parent: article,
+            cb(btn) {
+                btn.addEventListener('click', () => {
+                    const isRemove = removeCart(product);
+                    if (isRemove) {
+                        li.remove();
+                    }
+                })
+            }
+        })
+
+        const countBlock = renderCount(product.count, 'item__count', count => {
+            product.count = count;
+            addProductCart(product, true);
+        });
+
+        article.insertAdjacentElement('beforeend', countBlock);
+    });
+
+    const cartTotal = createElement('div', {
+        className: 'cart__total',
+        innerHTML: '<p class="cart__total-title">Итого:</p>'
+    }, {
+        parent: container,
+    });
+
+    const totalPrice = createElement('p', {
+        className: 'cart__total-price',
+        textContent: 'руб 0',
+    }, {
+        parent: cartTotal,
+    })
 }
 
 /*
+  <button class="item__del" aria-label="Удалить товар из корзины"></button>
+
+<div class="cart__total">
+        <p class="cart__total-title">Итого:</p>
+        <p class="cart__total-price">руб 9598</p>
+    </div>
+
+
 <div class="container">
     <h2 class="cart__title">Корзина</h2>
 
@@ -94,9 +200,6 @@ export const renderCart = ({render}) => {
         </li>
     </ul>
 
-    <div class="cart__total">
-        <p class="cart__total-title">Итого:</p>
-        <p class="cart__total-price">руб 9598</p>
-    </div>
+    
 </div>
 */

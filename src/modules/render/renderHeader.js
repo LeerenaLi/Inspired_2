@@ -48,7 +48,7 @@ const container = createElement('div', {
 });
 
 createElement('a', {
-    className: 'headeer__logo',
+    className: 'header__logo',
     href: '/#',
     innerHTML: `<img src="${logo}" alt="Логотип Inspired">`
 }, {
