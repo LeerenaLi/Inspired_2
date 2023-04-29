@@ -2,7 +2,7 @@ import './index.html';
 import './index.scss';
 
 import { router } from './modules/utils/router';
-import { mainPage } from './modules/controller/mainPage';
+import { mainPage } from './modules/controller/mainPageController';
 import { renderFooter } from './modules/render/renderFooter';
 import { renderHeader } from './modules/render/renderHeader';
 import { getData } from './modules/getData';
@@ -13,6 +13,7 @@ import { categoryPageController } from './modules/controller/categoryPageControl
 import { searchPageController } from './modules/controller/searchController';
 import { favoriteController } from './modules/controller/favoriteController';
 import { cardController } from './modules/controller/cardController';
+import { cartController } from './modules/controller/cartController';
 
 const init = async () => {
     try {
@@ -41,6 +42,8 @@ const init = async () => {
         router.on('/:gender/:category', categoryPageController);
 
         router.on('/product/:id', cardController);
+
+        router.on('cart', cartController);
 
         router.on('search', searchPageController);
 

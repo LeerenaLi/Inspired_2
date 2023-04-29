@@ -5,8 +5,12 @@ import { renderPagination } from "./renderPagination";
 import { getFavorite } from "../controller/favoriteController";
 
 
-export const renderGoods = async (title, params) => {
+export const renderGoods = async ({title, params, render}) => {
     goods.textContent = '';
+
+    if (!render) {
+        return;
+    }
 
     const data = await getData(`${API_URL}/api/goods`, params);
 

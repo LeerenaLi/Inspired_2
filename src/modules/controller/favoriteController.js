@@ -1,8 +1,10 @@
 import { goods } from "../const";
 import { renderCard } from "../render/renderCard";
+import { renderCart } from "../render/renderCart";
 import { renderGoods } from "../render/renderGoods";
 import { renderHero } from "../render/renderHero";
 import { renderNavigation } from "../render/renderNavigation";
+import { renderOrder } from "../render/renderOrder";
 
 export const getFavorite = () =>
     JSON.parse(localStorage.getItem('favorite') || '[]');
@@ -45,10 +47,16 @@ export const handlerFavorite = (e) => {
 goods.addEventListener('click', handlerFavorite);
 
 export const favoriteController = () => {
-    renderNavigation('all');
-    renderHero(false);
-    renderCard(false);
-    renderGoods('Избранное', {list: getFavorite()});
+    renderNavigation({repeat: true, render: true});
+    renderHero({render: false});
+    renderCard({render: false});
+    renderGoods({
+        title: 'Избранное', 
+        params: {list: getFavorite()}, 
+        render: true,
+    });
+    renderCart({render: false});
+    renderOrder({render: false});
 }
 
 

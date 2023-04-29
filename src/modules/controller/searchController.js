@@ -1,7 +1,9 @@
 import { renderCard } from '../render/renderCard';
+import { renderCart } from '../render/renderCart';
 import { renderGoods } from '../render/renderGoods';
 import { renderHero } from '../render/renderHero';
 import { renderNavigation } from '../render/renderNavigation';
+import { renderOrder } from '../render/renderOrder';
 import { router } from '../utils/router';
 
 export const searchController = formSearch => {
@@ -21,8 +23,10 @@ export const searchPageController = (routerData) => {
         params.page = routerData.params.page;
     }
 
-    renderNavigation('all');
-    renderHero(false);
-    renderCard(false);
-    renderGoods(routerData.params.value, params);
+    renderNavigation({render: true, repeat: true});
+    renderHero({render: false});
+    renderCard({render: false});
+    renderGoods({title: routerData.params.value, params, render: true});
+    renderCart({render: false});
+    renderOrder({render: false});
 }
