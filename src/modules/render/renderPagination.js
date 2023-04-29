@@ -11,7 +11,7 @@ export const renderPagination = (wrapperPagination, page, pages, count) => {
     });
 
     const isNotStart = page - Math.floor(count / 2) > 1;
-    const isEnd = page + Math.floor(count / 2) > pages;
+    const isEnd = page + Math.floor(count / 2) >= pages;
 
     if (count > pages) {
         count = pages;
@@ -42,22 +42,34 @@ export const renderPagination = (wrapperPagination, page, pages, count) => {
 
     if (pages > count) {
         createElement('a', {
-            className: `pagination__arrow
-                ${!isNotStart ? 'pagination__arrow_start-disabled' : 'pagination__arrow_start'}`,
+            className: `pagination__arrow pagination__arrow_start
+                ${!isNotStart ? 'pagination__arrow_start-disabled' : ''}`,
             href: getUrl({page: 1}),
-            // textContent: 'start',
+            tabIndex: !isNotStart ? '-1' : '0',
+            innerHTML: `
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M14 15.06L10.9096 12L14 8.94L13.0486 8L9 12L13.0486 16L14 15.06Z" fill="currentColor"/>
+                </svg>            
+            `,
             ariaLabel: 'В начало',
         }, {
-            parent: paginationList,
+            cb(arrow) {
+                wrapperPagination.prepend(arrow);
+            },
         }),
         createElement('a', {
-            className: `pagination__arrow 
-                ${isEnd ? 'pagination__arrow_end-disabled' : 'pagination__arrow_end'}`,
+            className: `pagination__arrow pagination__arrow_end
+                ${isEnd ? 'pagination__arrow_end-disabled' : ''}`,
             href: getUrl({page: pages}),
-            // textContent: 'end',
+            tabIndex: isEnd ? '-1' : '0',
+            innerHTML: `
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10 15.06L13.0904 12L10 8.94L10.9514 8L15 12L10.9514 16L10 15.06Z" fill="currentColor"/>
+                </svg>
+            `,
             ariaLabel: 'В конец',
         }, {
-            parent: paginationList,
+            parent: wrapperPagination,
         })
     }
 }

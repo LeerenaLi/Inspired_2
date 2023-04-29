@@ -93,6 +93,7 @@
     }
     &__color-list {
         display: flex;
+        flex-wrap: wrap;
         gap: 6px;
     }
     &__color-item {
@@ -118,6 +119,7 @@
     }
     &__size-list {
         display: flex;
+        flex-wrap: wrap;
         gap: 4px;
         font-size: 14px;
         text-transform: uppercase;

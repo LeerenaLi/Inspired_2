@@ -1,15 +1,23 @@
 .pagination {
+    padding-top: 40px;;
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    @include tablet {
+        padding-top: 24px;
+    }
+    @include mobile {
+        padding-top: 16px;
+    }
     &__list {
         display: flex;
         justify-content: center;
-        align-items: center;
-        gap: 7px;
-    }
-    &__item {
-        order: 1;
+        gap: 10px;
     }
     &__link {
-        padding: 0 7px 7px 7px;
+        display: block;
+        width: 16px;
+        padding: 4px 4px 6px 4px;
         font-weight: 400;
         font-size: 14px;
         color: $gray;
@@ -19,23 +27,14 @@
         }
     }
     &__arrow {
-        width: 24px;
-        height: 24px;
-        background-image: url('../img/arrow-next.svg');
-        background-repeat: no-repeat;
-        &_start {
-            transform: rotate(180deg);
-        }
+        color: $main-color;
         &_start-disabled {
-            background-image: url('../img/arrow-disabled.svg');
-        }
-        &_end {
-            order: 2;
+            color: $gray;
+            pointer-events: none;
         }
         &_end-disabled {
-            background-image: url('../img/arrow-disabled.svg');
-            transform: rotate(180deg);
-            order: 2;
+            color: $gray;
+            pointer-events: none;
         }
     }
 }

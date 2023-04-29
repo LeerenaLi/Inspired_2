@@ -16,7 +16,7 @@
         }
     }
     &__list {
-        padding: 40px 0;
+        padding-top: 40px;
         display: grid;
         gap: 40px 20px;
         grid-template-columns: repeat(auto-fill, 280px);
@@ -24,11 +24,11 @@
         @include tablet {
             grid-template-columns: repeat(auto-fill, 140px);
             row-gap: 24px;
-            padding: 24px 0;
+            padding-top: 24px;
         }
         @include mobile {
             gap: 16px 10px;
-            padding: 16px 0;
+            padding-top: 16px;
         }
     }
 }
