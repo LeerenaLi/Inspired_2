@@ -6,6 +6,9 @@
     text-transform: uppercase;
     color: $second-color;
     white-space: nowrap;
+    &:hover {
+        background-color: $gray;
+    }
     @include tablet {
         padding: 12px 41px;
         font-size: 10px; 

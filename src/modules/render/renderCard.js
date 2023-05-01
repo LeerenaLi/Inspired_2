@@ -1,5 +1,5 @@
 import { API_URL, DATA, card } from "../const"
-import { addProductCart } from "../controller/cartController";
+import { addProductCart, calcTotalPrice } from "../controller/cartController";
 import { getFavorite, handlerFavorite } from "../controller/favoriteController";
 import { createElement } from "../utils/createElement";
 import { renderCount } from "./renderCount";
@@ -36,14 +36,12 @@ export const renderCard = ({data, render}) => {
             elem.addEventListener('submit', (e) => {
                 e.preventDefault();
 
-                // let required = false;
-
                 const formData = new FormData(elem);
                 const product = Object.fromEntries(formData);
 
                 if (product.color && product.size && product.count) {
                     addProductCart(product);
-
+                    calcTotalPrice.updateCount();
                     return;
                 };
 
@@ -66,8 +64,6 @@ export const renderCard = ({data, render}) => {
                 });
                 
             });
-            
-            // addProductCart();
         }
     });
 

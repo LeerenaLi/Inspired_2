@@ -22,7 +22,7 @@ const form = createElement('form', {
     cb: searchController
 });
 
-createElement('input', {
+const inputSearch = createElement('input', {
     className: 'search__input',
     type: 'search',
     name: 'search',
@@ -37,4 +37,25 @@ createElement('button', {
     textContent: 'Искать',
 }, {
     parent: form,
-})
+});
+
+const searchError = createElement('p', {
+    className: 'search__error',
+    textContent: 'Поле необходимо заполнить',
+    _show: true,
+}, {
+    parent: form,
+},
+);
+  
+export const showSearchError = () => {
+    searchError.classList.add('search__error_show');
+    inputSearch.classList.add('search__input_error');
+
+    clearTimeout(searchError._showTimer);
+
+    searchError._showTimer = setTimeout(() => {
+        searchError.classList.remove('search__error_show');
+        inputSearch.classList.remove('search__input_error');
+    }, 3000);
+};

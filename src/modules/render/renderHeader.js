@@ -2,6 +2,7 @@ import { createElement } from "../utils/createElement";
 import logo from '../../img/logo.svg';
 import { search, searchToggle } from "./renderSearch";
 import { header } from "../const";
+import { calcTotalPrice } from "../controller/cartController";
 
 
 export const searchButton = createElement('button', {
@@ -27,6 +28,15 @@ export const cartLink = createElement('a', {
         </svg>  
     `,
     href: '#cart'
+}, {
+    append: createElement('span', {
+        className: 'header__link-count',
+    }, {
+        cb(elem) {
+            calcTotalPrice.updateCount();
+            calcTotalPrice.writeCount(elem);
+        }
+    })
 });
 
 export const favoriteLink = createElement('a', {

@@ -17,13 +17,13 @@ import { cartController } from './modules/controller/cartController';
 
 const init = async () => {
     try {
+        DATA.navigation = await getData(`${API_URL}/api/categories`);
+        DATA.colors = await getData(`${API_URL}/api/colors`);
+
         router.on('*', () => {
             renderHeader();
             renderFooter();
         });
-
-        DATA.navigation = await getData(`${API_URL}/api/categories`);
-        DATA.colors = await getData(`${API_URL}/api/colors`);
 
         createCssColors(DATA.colors);
 
